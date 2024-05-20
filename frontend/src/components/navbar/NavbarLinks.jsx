@@ -11,7 +11,7 @@ const NavbarLinks = () => {
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/${localStorage.getItem("userID")}`)
     .then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         setUser(response.data.data);
       }
     })
@@ -32,8 +32,8 @@ const NavbarLinks = () => {
           </Link>
         </li>
         <li className="nav-item mx-2">
-          <Link className="nav-link" to="/cars">
-            {t("navbar.bookCars")}
+          <Link className="nav-link" to="/homes">
+            {t("navbar.bookHomes")}
           </Link>
         </li>
         {user?.email === "admin@gmail.com" && (
@@ -44,7 +44,7 @@ const NavbarLinks = () => {
           </li>
         )}
       </ul>
-      {window.location.pathname != "/home" && <SearchInput type={"cars"} />}
+      {window.location.pathname !== "/home" && <SearchInput type={"homes"} />}
     </div>
   );
 };

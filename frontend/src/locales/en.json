@@ -1,19 +1,19 @@
 {
   "navbar.home": "Home",
-  "navbar.bookCars": "Book Cars",
+  "navbar.bookHomes": "Book Homes",
   "navbar.dashboard": "Dashboard",
-  "homePageText.spanTitle": "Rent a car ",
+  "homePageText.spanTitle": "Rent a home ",
   "homePageText.title": "and find great deals with us",
-  "homePageText.description": "Choose from a collection of brand new cars, low prices are part of our every day offer.",
+  "homePageText.description": "Choose from a collection of beautiful homes, low prices are part of our every day offer.",
   "homePageText.button": "Book online now!",
-  "featuredVehicles.title": "Featured Vehicles",
-  "featuredVehicles.description": "We have been working with clients around the world.",
+  "featuredHomes.title": "Featured Homes",
+  "featuredHomes.description": "We have been working with clients around the world.",
   "whyChooseUs.title": "Why Choose Us",
-  "whyChooseUs.description": "Experience hassle-free car rentals with exceptional service and a wide selection of vehicles.",
+  "whyChooseUs.description": "Experience hassle-free home rentals with exceptional service and a wide selection of properties.",
   "whyChooseUs.features": [
     {
-      "title": "Wide Selection of Cars",
-      "description": "We offer a diverse range of cars to suit your needs and preferences. Whether you're looking for a compact car for city driving or a spacious SUV for a family trip, we have a wide selection of vehicles to choose from."
+      "title": "Wide Selection of Homes",
+      "description": "We offer a diverse range of homes to suit your needs and preferences. Whether you're looking for a cozy apartment or a spacious villa, we have a wide selection of properties to choose from."
     },
     {
       "title": "Competitive Prices",
@@ -21,11 +21,11 @@
     },
     {
       "title": "Easy Booking Process",
-      "description": "Our user-friendly online booking system makes it quick and convenient to reserve your desired car. With just a few clicks, you can easily select your pickup location, choose your preferred car, and book it for your desired dates."
+      "description": "Our user-friendly online booking system makes it quick and convenient to reserve your desired home. With just a few clicks, you can easily select your location, choose your preferred property, and book it for your desired dates."
     },
     {
       "title": "Trust and Reliability",
-      "description": "With years of experience in the car rental industry, we have established a reputation for trust and reliability. You can rely on us to provide quality vehicles, excellent service, and a seamless rental experience."
+      "description": "With years of experience in the home rental industry, we have established a reputation for trust and reliability. You can rely on us to provide quality properties, excellent service, and a seamless rental experience."
     }
   ],
   "clientSpeak.title": "What Our Clients Say",
@@ -33,7 +33,7 @@
   "clientSpeak.testimonials": [
     {
       "heading": "Efficient Collaborating",
-      "text": "Outstanding car rental experience. Impressive teamwork and coordination. Effortless process, highly recommended.",
+      "text": "Outstanding home rental experience. Impressive teamwork and coordination. Effortless process, highly recommended.",
       "name": "Ann Black",
       "title": "CEO at ABC Corporation"
     },
@@ -50,8 +50,8 @@
       "title": "Small Business Owner"
     }
   ],
-  "footer.about": "About LOCAVO",
-  "footer.aboutDescription": "A wide selection of vehicles, competitive prices to make your experience enjoyable.",
+  "footer.about": "About Our Company",
+  "footer.aboutDescription": "A wide selection of properties, competitive prices to make your experience enjoyable.",
   "footer.company": "Company",
   "footer.blog": "Blog",
   "footer.aboutUs": "About Us",
@@ -65,7 +65,7 @@
   "navbarLoginButtons.login": "Login",
   "navbarLoginButtons.signup": "Sign up for free",
   "linkItems.home": "Home",
-  "linkItems.bookCars": "Book Cars",
+  "linkItems.bookHomes": "Book Homes",
   "linkItems.dashboard": "Dashboard",
   "linkItems.aboutUs": "About Us",
   "linkItems.termsOfService": "Terms of Service",
@@ -75,28 +75,30 @@
   "menuList.profile": "Profile",
   "menuList.logout": "Logout",
   "searchInput": "Search ...",
-  "carCard": {
+  "homeCard": {
     "rentNow": "Rent now",
-    "perDay": "/day",
-    "gearbox": "Gearbox",
-    "type": "Type",
+    "perNight": "/ night",
+    "sqft": "sqft",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "furnished": "Furnished",
     "available": "Available",
-    "automatic": "automatic",
-    "manuel": "manuel",
-    "petrol": "petrol",
-    "diesel": "diesel",
     "yes": "yes",
     "no": "no",
     "confirmRent": "Confirm rent",
-    "selectValidDates": "Please Select the valid rental and return dates."
+    "selectValidDates": "Please select valid rental and return dates.",
+    "city": "city"
   },
   "profile": {
+    "checkInDate": "Check-in date",
+    "checkOutDate": "Check-out date",
     "heading": "List of all your rentals",
-    "brand": "Brand",
-    "model": "Model",
-    "type": "Type",
+    "name": "Name",
+    "address": "Address",
     "price": "Price",
-    "gearbox": "Gearbox",
+    "furnished": "Furnished",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
     "rentalDate": "Rental Date",
     "returnDate": "Return Date",
     "noData": "No rentals available.",
@@ -116,7 +118,7 @@
     "password": "Password",
     "createAccount": "Create account",
     "signIn": "Sign In",
-    "welcome":"Welcome to Locavo",
+    "welcome":"Welcome to our Home Rental Platform",
     "loginMessage": "Don't have an account?",
     "signupMessage": "Already a user?",
     "home": "Go to home"

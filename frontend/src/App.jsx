@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import SignUp from "./pages/SignUpPage";
 import Login from "./pages/LoginPage";
 import Home from "./pages/HomePage";
-import BookCars from "./pages/BookCarsPage";
+import BookHomes from "./pages/BookHomesPage";
 import Rent from "./pages/RentPage";
 import Profile from "./pages/ProfilePage";
 import Dashboard from "./pages/DashboardPage";
@@ -31,8 +31,8 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
-        <Route path="cars" element={<BookCars />} />
-        <Route path="cars/:id" element={<Rent />} />
+        <Route path="homes" element={<BookHomes />} />
+        <Route path="homes/:id" element={<Rent />} />
         <Route path="profile" element={<Profile />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />

@@ -18,7 +18,7 @@ import { FiHome } from "react-icons/fi";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { RiFileTextLine } from "react-icons/ri";
 import { AiOutlineDashboard, AiOutlineInfoCircle } from "react-icons/ai";
-import { BiCar } from "react-icons/bi";
+import { BiHomeAlt } from "react-icons/bi"; // Changed icon to BiHomeAlt
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import axios from 'axios';
@@ -76,14 +76,14 @@ const HomeSidebarContent = () => {
   }, []);
 
   const homeTranslation = t("linkItems.home");
-  const bookCarsTranslation = t("linkItems.bookCars");
+  const bookHomesTranslation = t("linkItems.bookHomes"); // Changed translation key
   const dashboardTranslation = t("linkItems.dashboard");
   const aboutUsTranslation = t("linkItems.aboutUs");
   const termsOfServiceTranslation = t("linkItems.termsOfService");
 
   const LinkItems = [
     { name: homeTranslation, icon: FiHome, link: "/home" },
-    { name: bookCarsTranslation, icon: BiCar, link: "/cars" },
+    { name: bookHomesTranslation, icon: BiHomeAlt, link: "/homes" }, // Changed icon and link
     ...(email === "admin@gmail.com"
       ? [
           {

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Car;
+use App\Models\Home;
 
 
 class Rent extends Model
@@ -19,8 +19,8 @@ class Rent extends Model
     return $this->belongsTo(User::class);
 }
 
-public function car()
+public function home()
 {
-    return $this->belongsTo(Car::class);
+    return $this->belongsTo(Home::class);
 }
 }

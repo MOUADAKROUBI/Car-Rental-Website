@@ -1,9 +1,10 @@
+
 <?php
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CarController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RentController;
 
 /*
@@ -29,9 +30,9 @@ Route::get('users', [UserController::class, 'index']);
 
 Route::get('users/{id}', [UserController::class, 'getUser']);
 
-Route::get('cars', [CarController::class, 'index']);
+Route::get('homes', [HomeController::class, 'index']);
 
-Route::get('cars/{id}', [CarController::class, 'show']);
+Route::get('homes/{id}', [HomeController::class, 'show']);
 
 Route::get('logout', [UserController::class, 'logout']);
 
@@ -39,16 +40,16 @@ Route::get('rents', [RentController::class, 'index']);
 
 Route::post('rents', [RentController::class, 'store']);
 
-Route::post('cars', [CarController::class, 'store']);
+Route::post('homes', [HomeController::class, 'store']);
 
 Route::get('/users/{user_id}/rents', [RentController::class, 'getUserRents']);
 
 Route::post('/user/{user_id}', [UserController::class, 'updateProfile']);
 
-Route::delete('/cars/{id}', [CarController::class, 'destroy']);
+Route::delete('/homes/{id}', [HomeController::class, 'destroy']);
 Route::delete('/rents/{id}', [RentController::class, 'destroy']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
-Route::put('cars/{id}', [CarController::class, 'update']);
+Route::put('homes/{id}', [HomeController::class, 'update']);
 Route::put('rents/{id}', [RentController::class, 'update']);
 Route::post('users/{id}', [UserController::class, 'update']);

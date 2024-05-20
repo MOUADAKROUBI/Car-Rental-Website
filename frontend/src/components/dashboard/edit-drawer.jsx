@@ -35,7 +35,7 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
   };
 
   const renderInputFields = () => {
-    if (dataType === "cars") {
+    if (dataType === "homes") {
       return (
         <>
           <Box>
@@ -49,33 +49,33 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
           </Box>
 
           <Box>
-            <FormLabel htmlFor="brand">Brand</FormLabel>
+            <FormLabel htmlFor="type">Type</FormLabel>
             <Input
-              id="brand"
-              value={formData.brand}
+              id="type"
+              value={formData.type}
               onChange={handleChange}
             />
           </Box>
 
           <Box>
-            <FormLabel htmlFor="model">Model</FormLabel>
-            <Input id="model" value={formData.model} onChange={handleChange} />
+            <FormLabel htmlFor="location">Location</FormLabel>
+            <Input id="location" value={formData.location} onChange={handleChange} />
           </Box>
 
           <Box>
-            <FormLabel htmlFor="gearbox">Gearbox</FormLabel>
+            <FormLabel htmlFor="bedrooms">Bedrooms</FormLabel>
             <Input
-              id="gearbox"
-              value={formData.gearbox}
+              id="bedrooms"
+              value={formData.bedrooms}
               onChange={handleChange}
             />
           </Box>
 
           <Box>
-            <FormLabel htmlFor="fuel_type">Fuel Type</FormLabel>
+            <FormLabel htmlFor="bathrooms">Bathrooms</FormLabel>
             <Input
-              id="fuel_type"
-              value={formData.fuel_type}
+              id="bathrooms"
+              value={formData.bathrooms}
               onChange={handleChange}
             />
           </Box>
@@ -93,8 +93,8 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
               defaultValue={formData.available}
               onChange={handleChange}
             >
-              <option value="1">{t('carCard.yes')}</option>
-              <option value="0">{t('carCard.no')}</option>
+              <option value="1">{t('homeCard.yes')}</option>
+              <option value="0">{t('homeCard.no')}</option>
             </Select>
           </Box>
         </>
@@ -176,10 +176,10 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
           </Box>
 
           <Box>
-            <FormLabel htmlFor="car_id">Car ID</FormLabel>
+            <FormLabel htmlFor="home_id">Home ID</FormLabel>
             <Input
-              id="car_id"
-              value={formData.car_id}
+              id="home_id"
+              value={formData.home_id}
               onChange={handleChange}
             />
           </Box>

@@ -9,10 +9,10 @@ import ClientSpeak from "../components/home/client-speak";
 import AvatarMenu from "../components/navbar/avatar-menu";
 import useAuthentication from "../useAuthentication";
 import WhyChooseUs from "../components/home/why-choose-us";
-import FeaturedVehicles from "../components/home/featured-vehicles";
 import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import { useEffect, useState } from "react";
+import FeaturedHomes from "../components/home/featured-vehicles";
 
 function Home() {
   const { isLoggedIn, isLoading } = useAuthentication();
@@ -50,7 +50,7 @@ function Home() {
           <HomePageImage />
         </Flex>
       </Container>
-      <FeaturedVehicles />
+      <FeaturedHomes />
       <WhyChooseUs />
       <ClientSpeak />
       <Footer />

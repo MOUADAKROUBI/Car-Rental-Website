@@ -1,24 +1,13 @@
-import { Box, Flex, Hide, Image } from "@chakra-ui/react";
+import { Flex, Hide, Image } from "@chakra-ui/react";
+import homePageImage from '/9694410_4241602.svg';
+
 
 const HomePageImage = () => {
   return (
     <Hide below="md">
       <Flex w={["50%", "50%", "70%"]} alignItems="center" position="relative">
-        <Box
-          position="absolute"
-          alignItems="center"
-          borderRadius="2xl"
-          bg="var(--blue-gradient)"
-          top={0}
-          bottom={0}
-          mx={"10"}
-          w="90%"
-          minW={"600px"}
-        ></Box>
         <Image
-          src="assets/9694410_4241602.svg"
-          top="10vh"
-          position="absolute"
+          src={homePageImage}
           minW={"730px"}
         />
       </Flex>

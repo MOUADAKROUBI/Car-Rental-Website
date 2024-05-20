@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import NavItem from "./nav-item";
 import { FaUserFriends } from "react-icons/fa";
-import { GiCarKey } from "react-icons/gi";
-import { RiCarLine } from "react-icons/ri";
+import { GiHomeGarage } from "react-icons/gi";
+import { RiHomeLine } from "react-icons/ri";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -37,12 +37,12 @@ const SidebarContent = ({ handleData, ...props }) => {
       tab: "Users",
     },
     {
-      icon: RiCarLine,
-      label: "cars",
-      tab: "Cars",
+      icon: RiHomeLine,
+      label: "homes",
+      tab: "Homes",
     },
     {
-      icon: GiCarKey,
+      icon: GiHomeGarage,
       label: "rents",
       tab: "Rents",
     },

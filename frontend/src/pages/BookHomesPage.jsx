@@ -2,7 +2,7 @@ import { Box, GridItem, SimpleGrid, VStack } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../components/navbar/Navbar";
-import CarCard from "../components/ui/car-card";
+import HomeCard from "../components/ui/home-card";
 import Footer from "../components/footer";
 import LoadingSpinner from "../components/ui/loading-spinner";
 import SearchInput from "../components/search";
@@ -13,15 +13,15 @@ import SearchContext from "../SearchContext";
 import NavbarLoginButtons from "../components/navbar/login-buttons";
 import useAuthentication from "../useAuthentication";
 
-function BookCars() {
+function BookHomesPage() {
   const { searchResults, setSearchResults } = useContext(SearchContext);
-  const [cars, setCars] = useState();
+  const [homes, setHomes] = useState();
   const [isLoading, setLoading] = useState(true);
   const { isLoggedIn } = useAuthentication();
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/cars").then((response) => {
-      setCars(response.data.data);
+    axios.get("http://127.0.0.1:8000/api/homes").then((response) => {
+      setHomes(response.data.data);
       setLoading(false);
     });
   }, []);
@@ -45,14 +45,14 @@ function BookCars() {
             py={10}
           >
             {searchResults && searchResults.length > 0
-              ? searchResults.map((car) => (
-                  <GridItem key={car.id} colSpan={1}>
-                    <CarCard props={car} />
+              ? searchResults.map((home) => (
+                  <GridItem key={home.id} colSpan={1}>
+                    <HomeCard props={home} />
                   </GridItem>
                 ))
-              : cars.map((car) => (
-                  <GridItem key={car.id} colSpan={1}>
-                    <CarCard props={car} />
+              : homes.map((home) => (
+                  <GridItem key={home.id} colSpan={1}>
+                    <HomeCard props={home} />
                   </GridItem>
                 ))}
           </SimpleGrid>
@@ -63,4 +63,4 @@ function BookCars() {
   );
 }
 
-export default BookCars;
+export default BookHomesPage;

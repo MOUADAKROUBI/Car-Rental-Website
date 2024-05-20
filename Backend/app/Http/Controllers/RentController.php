@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Car;
+use App\Models\Home;
 use Illuminate\Http\Request;
 use App\Models\Rent;
 use App\Models\User;
@@ -13,17 +13,17 @@ class RentController extends Controller
     // Get all rents
     public function index()
     {
-        $rents = Rent::with('user', 'car')->get();
+        $rents = Rent::with('user', 'home')->get();
 
-        // Transform the data to include user name and car name
+        // Transform the data to include user name and home name
         $formattedRents = $rents->map(function ($rent) {
             return [
                 'id' => $rent->id,
-                'rental_date' => $rent->rental_date,
-                'return_date' => $rent->return_date,
+                'checkIn' => $rent->checkIn,
+                'checkOut' => $rent->checkOut,
                 'price' => $rent->price,
                 'user_name' => $rent->user->firstname . ' ' . $rent->user->lastname,
-                'car_name' => $rent->car->brand
+                'home_type' => $rent->home->type
             ];
         });
 
@@ -35,11 +35,11 @@ class RentController extends Controller
     {
         //$rent = Rent::create($request->all());
         $rent = DB::table('rentals')->insert([
-            'rental_date' => $request->input('rental_date'),
-            'return_date' => $request->input('return_date'),
+            'checkIn' => $request->input('checkIn'),
+            'checkOut' => $request->input('checkOut'),
             'price' => $request->input('price'),
             'user_id' => $request->input('user_id'),
-            'car_id' => $request->input('car_id')
+            'home_id' => $request->input('home_id')
         ]);
         return response()->json(['success' => true, 'data' => $rent], 201);
     }
@@ -48,7 +48,7 @@ class RentController extends Controller
     public function getUserRents($user_id)
     {
         //$rents = Rent::where('user_id', $user_id)->get();
-        $user = User::with('rents.car')->find($user_id);
+        $user = User::with('rents.home')->find($user_id);
         $rents = $user->rents;
 
         return response()->json(['success' => true, 'data' => $rents]);
@@ -58,20 +58,20 @@ class RentController extends Controller
     {
         $rent = Rent::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'rental_date' => 'required',
-            'return_date' => 'required',
+        $request->validate([
+            'checkIn' => 'required',
+            'checkOut' => 'required',
             'price' => 'required',
             'user_id' => 'required',
-            'car_id' => 'required',
+            'home_id' => 'required',
         ]);
 
         DB::table('rentals')->where('id', $id)->update([
-            'rental_date' => $request->rental_date,
-            'return_date' => $request->return_date,
+            'checkIn' => $request->checkIn,
+            'checkOut' => $request->checkOut,
             'price' => $request->price,
             'user_id' => $request->user_id,
-            'car_id' => $request->car_id
+            'home_id' => $request->home_id
         ]);
 
         return response()->json([

@@ -38,12 +38,11 @@ function Dashboard() {
   const [data, setData] = useState([]);
   const [header, setHeader] = useState([
     "id",
-    "brand",
-    "model",
-    "gearbox",
-    "type",
-    "price",
-    "availability",
+    "avatar",
+    "firstname",
+    "lastname",
+    "telephone",
+    "email",
   ]);
   const [type, setType] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,7 +50,7 @@ function Dashboard() {
   const navigate = useNavigate();
   useEffect(() => {
     handleData("Users");
-    navigate("?tab=Users");
+    navigate("?tab=users");
   }, [navigate]);
 
   const handleData = (type) => {
@@ -69,42 +68,54 @@ function Dashboard() {
           ]);
           setData(response.data.data);
           setType("users");
-        });
-    } else if (type == "Cars") {
+        })
+        .catch( (err) => {
+          console.log(err)
+        })
+    } else if (type == "Homes") {
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/api/cars`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/api/homes`)
         .then((response) => {
           setHeader([
             "id",
-            "brand",
-            "model",
-            "gearbox",
-            "fuel_type",
+            "type",
+            "address",
+            "city",
+            "country",
             "price",
-            "available",
+            "sqft",
+            "frunished",
+            "badrooms",
+            "bathrooms",
+            "availability",
           ]);
           setData(response.data.data);
-          setType("cars");
-        });
-    } else if (type == "Rents") {
+          setType("homes");
+        })
+        .catch( (err) => {
+          console.log(err)
+        })
+    } else if (type == "Rents"){
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/rents`)
         .then((response) => {
           setHeader([
             "id",
-            "rental_date",
-            "return_date",
+            "checkIn",
+            "checkOut",
             "price",
             "user_name",
-            "car_name",
+            "home_type",
           ]);
           setData(response.data.data);
           setType("rents");
+        })
+        .catch( (err) => {
+          console.log(err)
         });
     }
   };
 
-  // her is a problem in sent file to the server
   const handleUpdateItem = (itemId, updatedItem) => {
     const endpoint = `${
       import.meta.env.VITE_BACKEND_URL
@@ -181,7 +192,7 @@ function Dashboard() {
                     <Heading fontSize={{ base: "xl", md: "2xl" }} pb="5">
                       {t("header.greeting")}
                     </Heading>
-                    {type === "cars" && <CreateItemDrawer dataType={type} />}
+                    {type === "homes" && <CreateItemDrawer dataType={type} />}
                   </Flex>
                   <Table variant="striped" size={{ base: "sm", md: "md" }}>
                     <Thead>
@@ -197,7 +208,7 @@ function Dashboard() {
                         ? searchResults.map((item) => (
                             <Tr key={item.id}>
                               {header.map((column) => {
-                                if (column === "available")
+                                if (column === "availability")
                                   return (
                                     <Td key={item.id}>
                                       {item[column] === 0 ? "yes" : "no"}
@@ -240,12 +251,12 @@ function Dashboard() {
                         : data.map((item) => (
                             <Tr key={item.id} textAlign="center">
                               {header.map((column) => {
-                                if (column === "available") {
+                                if (column === "availability") {
                                   return (
                                     <Td key={item.id}>
                                       {item[column]
-                                        ? t("carCard.yes")
-                                        : t("carCard.no")}
+                                        ? t("homeCard.yes")
+                                        : t("homeCard.no")}
                                     </Td>
                                   );
                                 } else {

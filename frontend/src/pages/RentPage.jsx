@@ -30,7 +30,7 @@ import NavbarLoginButtons from "../components/navbar/login-buttons";
 import useAuthentication from "../useAuthentication";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
-function Rent() {
+function RentPage() {
   const { t } = useTranslation();
 
   const { isLoggedIn } = useAuthentication();
@@ -38,19 +38,19 @@ function Rent() {
   const navigate = (route) => navigation(route);
   let params = useParams();
   const toast = useToast();
-  const [car, setCar] = useState({});
+  const [home, setHome] = useState({});
   const [isLoading, setLoading] = useState(true);
 
-  const rentalDate = useRef("");
-  const returnDate = useRef("");
+  const checkIn = useRef("");
+  const checkOut = useRef("");
   const [datesIsValid, setDatesIsValid] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/cars/${params.id}`)
+      .get(`http://127.0.0.1:8000/api/homes/${params.id}`)
       .then((response) => {
-        setCar(response.data.data[0]);
+        setHome(response.data.data[0]);
         setTotalPrice(response.data.data[0].price);
         setLoading(false);
       });
@@ -61,53 +61,53 @@ function Rent() {
   }, []);
 
   const calculatePrice = () => {
-    const rental_date = Date.parse(rentalDate.current.value);
-    const return_date = Date.parse(returnDate.current.value);
+    const checkInDate = Date.parse(checkIn.current.value);
+    const checkOutDate = Date.parse(checkOut.current.value);
     const now = new Date().getTime();
 
-    const rentDuration = return_date - rental_date;
-    if (rentalDate.current.value && returnDate.current.value) {
-      if (rental_date < now || return_date < now) {
+    const rentDuration = checkOutDate - checkInDate;
+    if (checkIn.current.value && checkOut.current.value) {
+      if (checkIn < now || checkOut < now) {
         setDatesIsValid(false);
-        showToast(toast, t("carCard.selectValidDates"), "error", "Error");
+        showToast(toast, t("homeCard.selectValidDates"), "error", "Error");
       } else if (rentDuration <= 0) {
         setDatesIsValid(false);
-        showToast(toast, t("carCard.selectValidDates"), "error", "Error");
+        showToast(toast, t("homeCard.selectValidDates"), "error", "Error");
       } else {
         setDatesIsValid(true);
-        const price = (rentDuration / (1000 * 60 * 60 * 24)) * car.price;
+        const price = (rentDuration / (1000 * 60 * 60 * 24)) * home.price;
         setTotalPrice(price);
       }
     }
   };
 
-  const handleRentalDateChange = () => {
+  const handleCheckInDateChange = () => {
     calculatePrice();
   };
 
-  const handleReturnDateChange = () => {
+  const handleCheckOutDateChange = () => {
     calculatePrice();
   };
 
   if (isLoading) return <LoadingSpinner />;
 
-  function rentACar(e) {
+  function rentAHome(e) {
     e.preventDefault();
 
     const rent = {
-      rental_date: rentalDate.current.value,
-      return_date: returnDate.current.value,
+      checkIn: checkIn.current.value,
+      checkOut: checkOut.current.value,
       price: totalPrice,
       user_id: localStorage.getItem("userID"),
-      car_id: params.id,
+      home_id: params.id,
     };
 
     if (datesIsValid && isLoggedIn) {
       axios
-        .post("http://127.0.0.1:8000/api/rents", rent)
+        .post(import.meta.env.VITE_BACKEND_URL + "/api/rents", rent)
         .then((response) => {
           showToast(toast, "Rent created successfully!", "success", "Success");
-          navigate("/cars");
+          navigate("/homes");
         })
         .catch((error) => {
           showToast(toast, "Creating a rent failed", "error", "Error");
@@ -119,8 +119,6 @@ function Rent() {
       showToast(toast, "Please select valid dates", "error", "Error");
     }
   }
-
-  const backendURL = "http://127.0.0.1:8000/";
 
   return (
     <>
@@ -141,7 +139,7 @@ function Rent() {
           mb={10}
         >
           <Box w={{ base: "100%", lg: "50%" }}>
-            <Image src={car.photo1} objectFit="cover" h={"full"}></Image>
+            <Image src={home.photo1} objectFit="cover" h={"full"}></Image>
           </Box>
           <Box w={{ base: "100%", lg: "50%" }} p={"5%"} bg={"white"} h={"full"}>
             <Button
@@ -149,62 +147,88 @@ function Rent() {
                 <ArrowBackIcon color="black" fontSize={25} fontWeight={600} />
               }
               variant="outline"
-              onClick={() => navigate('/cars')}
+              onClick={() => navigate("/homes")}
             >
               Back
             </Button>
             <VStack alignItems={"center"} spacing={"3"}>
-              <Heading fontWeight={"500"}>{car.brand}</Heading>
-
               <FormLabel fontWeight="600" color="gray.600">
-                {t("profile.rentalDate")}
+                {t("profile.checkInDate")}
               </FormLabel>
               <Input
                 type={"date"}
-                ref={rentalDate}
-                onChange={handleRentalDateChange}
+                ref={checkIn}
+                onChange={handleCheckInDateChange}
               />
               <FormLabel fontWeight="600" color="gray.600">
-                {t("profile.returnDate")}
+                {t("profile.checkOutDate")}
               </FormLabel>
               <Input
                 type={"date"}
-                ref={returnDate}
-                onChange={handleReturnDateChange}
+                ref={checkOut}
+                onChange={handleCheckOutDateChange}
               />
 
               <Divider borderColor="gray.300" py={3} />
-              <SimpleGrid w={"full"} columns={3} py={3} textAlign="center">
+              <SimpleGrid w={"full"} columns={4} py={3} textAlign="center">
                 <GridItem>
                   <Heading fontWeight="500" color="gray.400" size="xs">
-                    {t("profile.gearbox")}
+                    {t("homeCard.sqft")}
                   </Heading>
-                  <Text fontWeight="600" color="gray.600">
-                    {car.gearbox === "automatic" || car.gearbox === "manuel"
-                      ? t(`carCard.${car.gearbox.toLowerCase()}`)
-                      : car.fuel_type}
+                  <Text fontWeight="500" color="gray.600">
+                    {home.sqft}
                   </Text>
                 </GridItem>
                 <GridItem>
                   <Heading fontWeight="500" color="gray.400" size="xs">
-                    {t("profile.type")}
+                    type
                   </Heading>
-                  <Text fontWeight="600" color="gray.600">
-                    {car.fuel_type === "petrol" || car.fuel_type === "diesel"
-                      ? t(`carCard.${car.fuel_type.toLowerCase()}`)
-                      : car.fuel_type}
+                  <Text fontWeight="500" color="gray.600">
+                    {home.type}
                   </Text>
                 </GridItem>
                 <GridItem>
                   <Heading fontWeight="500" color="gray.400" size="xs">
-                    {t("carCard.available")}
+                    {t("homeCard.city")}
+                  </Heading>
+                  <Text fontWeight="500" color="gray.600">
+                    {home.city}
+                  </Text>
+                </GridItem>
+                <GridItem>
+                  <Heading fontWeight="500" color="gray.400" size="xs">
+                    {t("profile.furnished")}
                   </Heading>
                   <Text fontWeight="600" color="gray.600">
-                    {car.available === 1
-                      ? t("carCard.yes")
-                      : car.available === 0
-                      ? t("carCard.no")
-                      : car.available}
+                    {home.furnished ? t("homeCard.yes") : t("homeCard.no")}
+                  </Text>
+                </GridItem>
+                <GridItem>
+                  <Heading fontWeight="500" color="gray.400" size="xs">
+                    {t("homeCard.bedrooms")}
+                  </Heading>
+                  <Text fontWeight="500" color="gray.600">
+                    {home.bedrooms}
+                  </Text>
+                </GridItem>
+                <GridItem>
+                  <Heading fontWeight="500" color="gray.400" size="xs">
+                    {t("profile.bathrooms")}
+                  </Heading>
+                  <Text fontWeight="600" color="gray.600">
+                    {home.bathrooms}
+                  </Text>
+                </GridItem>
+                <GridItem>
+                  <Heading fontWeight="500" color="gray.400" size="xs">
+                    {t("homeCard.available")}
+                  </Heading>
+                  <Text fontWeight="600" color="gray.600">
+                    {home.available === 1
+                      ? t("homeCard.yes")
+                      : home.available === 0
+                      ? t("homeCard.no")
+                      : home.available}
                   </Text>
                 </GridItem>
               </SimpleGrid>
@@ -226,8 +250,8 @@ function Rent() {
                   DH
                 </Text>
               </HStack>
-              <Button onClick={rentACar} w={"full"}>
-                {t("carCard.confirmRent")}
+              <Button onClick={rentAHome} w={"full"}>
+                {t("homeCard.confirmRent")}
               </Button>
             </VStack>
           </Box>
@@ -237,4 +261,4 @@ function Rent() {
   );
 }
 
-export default Rent;
+export default RentPage;

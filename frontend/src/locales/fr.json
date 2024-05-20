@@ -1,19 +1,19 @@
 {
   "navbar.home": "Accueil",
-  "navbar.bookCars": "Réserver une voiture",
+  "navbar.bookHomes": "Réserver un logement",
   "navbar.dashboard": "Tableau de bord",
-  "homePageText.spanTitle": "Louez une voiture ",
+  "homePageText.spanTitle": "Louez un logement ",
   "homePageText.title": "et trouvez de superbes offres avec nous",
-  "homePageText.description": "Choisissez parmi une collection de voitures neuves, les prix bas font partie de notre offre quotidienne.",
+  "homePageText.description": "Choisissez parmi une collection de logements de qualité, les prix bas font partie de notre offre quotidienne.",
   "homePageText.button": "Réservez maintenant !",
-  "featuredVehicles.title": "Véhicules en vedette",
-  "featuredVehicles.description": "Nous travaillons avec des clients du monde entier.",
+  "featuredHomes.title": "Logements en vedette",
+  "featuredHomes.description": "Nous travaillons avec des clients du monde entier.",
   "whyChooseUs.title": "Pourquoi nous choisir",
-  "whyChooseUs.description": "Profitez d'une location de voiture sans tracas avec un service exceptionnel et un large choix de véhicules.",
+  "whyChooseUs.description": "Profitez d'une location de logement sans tracas avec un service exceptionnel et un large choix de propriétés.",
   "whyChooseUs.features": [
     {
-      "title": "Large choix de voitures",
-      "description": "Nous proposons une gamme diversifiée de voitures pour répondre à vos besoins et préférences. Que vous recherchiez une voiture compacte pour la conduite en ville ou un SUV spacieux pour un voyage en famille, nous avons un large choix de véhicules parmi lesquels choisir."
+      "title": "Large choix de logements",
+      "description": "Nous proposons une gamme diversifiée de logements pour répondre à vos besoins et préférences. Que vous recherchiez une maison spacieuse pour des vacances en famille ou un appartement confortable pour un séjour d'affaires, nous avons un large choix de propriétés parmi lesquelles choisir."
     },
     {
       "title": "Prix compétitifs",
@@ -21,11 +21,11 @@
     },
     {
       "title": "Processus de réservation facile",
-      "description": "Notre système de réservation en ligne convivial permet de réserver rapidement et facilement la voiture de votre choix. En quelques clics seulement, vous pouvez facilement sélectionner votre lieu de prise en charge, choisir votre voiture préférée et la réserver pour les dates souhaitées."
+      "description": "Notre système de réservation en ligne convivial permet de réserver rapidement et facilement le logement de votre choix. En quelques clics seulement, vous pouvez facilement sélectionner votre destination, choisir votre logement préféré et le réserver pour les dates souhaitées."
     },
     {
       "title": "Confiance et fiabilité",
-      "description": "Avec des années d'expérience dans l'industrie de la location de voitures, nous avons acquis une réputation de confiance et de fiabilité. Vous pouvez compter sur nous pour fournir des véhicules de qualité, un excellent service et une expérience de location sans faille."
+      "description": "Avec des années d'expérience dans l'industrie de la location de logements, nous avons acquis une réputation de confiance et de fiabilité. Vous pouvez compter sur nous pour fournir des logements de qualité, un excellent service et une expérience de location sans faille."
     }
   ],
   "clientSpeak.title": "Ce que disent nos clients",
@@ -33,7 +33,7 @@
   "clientSpeak.testimonials": [
     {
       "heading": "Collaboration efficace",
-      "text": "Expérience exceptionnelle de location de voiture. Travail d'équipe impressionnant et coordination. Processus sans effort, fortement recommandé.",
+      "text": "Expérience exceptionnelle de location de logement. Travail d'équipe impressionnant et coordination. Processus sans effort, fortement recommandé.",
       "name": "Ann Black",
       "title": "PDG chez ABC Corporation"
     },
@@ -51,7 +51,7 @@
     }
   ],
   "footer.about": "LOCAVO",
-  "footer.aboutDescription": "Large choix de véhicules, prix compétitifs pour rendre votre expérience agréable.",
+  "footer.aboutDescription": "Large choix de logements, prix compétitifs pour rendre votre expérience agréable.",
   "footer.company": "Entreprise",
   "footer.blog": "Blog",
   "footer.aboutUs": "À propos de nous",
@@ -65,7 +65,7 @@
   "navbarLoginButtons.login": "Connexion",
   "navbarLoginButtons.signup": "Inscrivez-vous gratuitement",
   "linkItems.home": "Accueil",
-  "linkItems.bookCars": "Réserver une voiture",
+  "linkItems.bookHomes": "Réserver un logement",
   "linkItems.dashboard": "Tableau de bord",
   "linkItems.aboutUs": "À propos de nous",
   "linkItems.termsOfService": "Conditions d'utilisation",
@@ -76,28 +76,30 @@
   "menuList.logout": "Déconnexion",
   "searchInput": "Rechercher ...",
 
-  "carCard": {
+  "homeCard": {
     "rentNow": "Louer maintenant",
-    "perDay": "/jour",
-    "gearbox": "Boîte",
-    "type": "Type",
+    "perNight": "/nuit",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
+    "sqft": "pieds carrés",
+    "furnished": "Meublé",
     "available": "Disponible",
-    "automatic": "automatique",
-    "manual": "manuel",
-    "petrol": "essence",
-    "diesel": "diesel",
     "yes": "oui",
     "no": "non",
     "confirmRent": "Confirmer la location",
-    "selectValidDates": "Veuillez sélectionner des dates de location et de retour valides."
+    "selectValidDates": "Veuillez sélectionner des dates de location et de retour valides.",
+    "city": "Vill"
   },
   "profile": {
+    "checkInDate": "Arrivée à la date",
+    "checkOutDate": "Départ à la date",
     "heading": "Liste de toutes vos locations",
-    "brand": "Marque",
-    "model": "Modèle",
+    "name": "Nom",
     "type": "Type",
     "price": "Prix",
-    "gearbox": "Boîte de vitesses",
+    "furnished": "Meublé",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
     "rentalDate": "Date de location",
     "returnDate": "Date de retour",
     "noData": "Aucune location disponible.",

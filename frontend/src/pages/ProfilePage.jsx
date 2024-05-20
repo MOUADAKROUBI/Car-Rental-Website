@@ -58,13 +58,12 @@ function Profile() {
               <Table variant="striped" size={["md", "md", "lg"]}>
                 <Thead>
                   <Tr>
-                    <Th>{t("profile.brand")}</Th>
-                    <Th>{t("profile.model")}</Th>
-                    <Th>{t("profile.type")}</Th>
+                    <Th>id</Th>
+                    <Th>type</Th>
                     <Th>{t("profile.price")}</Th>
-                    <Th>{t("profile.gearbox")}</Th>
-                    <Th>{t("profile.rentalDate")}</Th>
-                    <Th>{t("profile.returnDate")}</Th>
+                    <Th>{t("profile.bedrooms")}</Th>
+                    <Th>{t("profile.checkInDate")}</Th>
+                    <Th>{t("profile.checkOutDate")}</Th>
                   </Tr>
                 </Thead>
                 {rents.length === 0 ? (
@@ -79,13 +78,12 @@ function Profile() {
                   <Tbody>
                     {rents.map((rent) => (
                       <Tr key={rent.id}>
-                        <Td>{rent.car.brand}</Td>
-                        <Td>{rent.car.model}</Td>
-                        <Td>{rent.car.fuel_type}</Td>
-                        <Td>{rent.car.price}</Td>
-                        <Td>{rent.car.gearbox}</Td>
-                        <Td>{rent.rental_date}</Td>
-                        <Td>{rent.return_date}</Td>
+                        <Td>{rent.home.id}</Td>
+                        <Td>{rent.home.type}</Td>
+                        <Td>{rent.home.price}</Td>
+                        <Td>{rent.home.bedrooms}</Td>
+                        <Td>{rent.checkIn}</Td>
+                        <Td>{rent.checkOut}</Td>
                       </Tr>
                     ))}
                   </Tbody>

@@ -1,17 +1,15 @@
 import {
   Box,
   Image,
-  Link,
   Container,
   Flex,
-  Heading,
   Stack,
   Text,
   chakra,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-const CarCard = ({ image, carName, model }) => {
+const HomeCard = ({ image, homeName, location }) => {
   return (
     <Flex p={30} w="full" alignItems="center" justifyContent="center">
       <Box
@@ -27,7 +25,7 @@ const CarCard = ({ image, carName, model }) => {
           h={56}
           fit="cover"
           src={`images/${image}`}
-          alt="avatar"
+          alt="home"
         />
 
         <Box py={5} textAlign="center">
@@ -37,10 +35,10 @@ const CarCard = ({ image, carName, model }) => {
             color="gray.800"
             fontWeight="bold"
           >
-            {carName}
+            {homeName}
           </Text>
           <chakra.span fontSize="sm" color="gray.700">
-            {model}
+            {location}
           </chakra.span>
         </Box>
       </Box>
@@ -48,7 +46,7 @@ const CarCard = ({ image, carName, model }) => {
   );
 };
 
-const FeaturedVehicles = () => {
+const FeaturedHomes = () => {
   const { t } = useTranslation();
 
   return (
@@ -72,7 +70,7 @@ const FeaturedVehicles = () => {
               color: "gray.900",
             }}
           >
-            {t("featuredVehicles.title")}
+            {t("featuredHomes.title")}
           </chakra.p>
           <chakra.p
             mt={4}
@@ -86,20 +84,20 @@ const FeaturedVehicles = () => {
               color: "gray.400",
             }}
           >
-            {t("featuredVehicles.description")}
+            {t("featuredHomes.description")}
           </chakra.p>
         </Box>
         <Stack
           direction={{ base: "column", md: "row" }}
           spacing={{ base: 10, md: 4, lg: 10 }}
         >
-          <CarCard image="front5.webp" carName="Dacia Dokker" model="2016" />
-          <CarCard image="front2.webp" carName="Dacia Duster" model="2021" />
-          <CarCard image="front1.webp" carName="Renault Clio" model="2019" />
+          <HomeCard image="front5.webp" homeName="Luxury Villa" location="Malibu" />
+          <HomeCard image="front2.webp" homeName="Beach House" location="Miami" />
+          <HomeCard image="front1.webp" homeName="Mountain Cabin" location="Aspen" />
         </Stack>
       </Container>
     </Box>
   );
 };
 
-export default FeaturedVehicles;
+export default FeaturedHomes;

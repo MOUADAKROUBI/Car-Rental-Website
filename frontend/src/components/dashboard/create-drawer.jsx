@@ -41,15 +41,14 @@ function CreateItemDrawer({ dataType, onUpdate }) {
 
   const handleSubmit = async () => {
     // add post requests to the backend
-    const { photo1, photo2, brand, model, gearbox, fuel_type, price, available } = formData;
+    const { photo1, photo2, name, location, type, price, available } = formData;
     const formDataToSend = new FormData();
 
     formDataToSend.append("photo1", photo1);
     formDataToSend.append("photo2", photo2);
-    formDataToSend.append("brand", brand);
-    formDataToSend.append("model", model);
-    formDataToSend.append("gearbox", gearbox);
-    formDataToSend.append("fuel_type", fuel_type);
+    formDataToSend.append("name", name);
+    formDataToSend.append("location", location);
+    formDataToSend.append("type", type);
     formDataToSend.append("price", price);
     formDataToSend.append("available", available);
 
@@ -69,7 +68,7 @@ function CreateItemDrawer({ dataType, onUpdate }) {
   };
 
   const renderInputFields = () => {
-    if (dataType === "cars") {
+    if (dataType === "homes") {
       return (
         <>
           <Box>
@@ -81,23 +80,18 @@ function CreateItemDrawer({ dataType, onUpdate }) {
             <DropFile refe="photo2" handleChange={handleChange} />
           </Box>
           <Box>
-            <FormLabel htmlFor="brand">Brand</FormLabel>
-            <Input id="brand" onChange={handleChange} />
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <Input id="name" onChange={handleChange} />
           </Box>
 
           <Box>
-            <FormLabel htmlFor="model">Model</FormLabel>
-            <Input id="model" onChange={handleChange} />
+            <FormLabel htmlFor="location">Location</FormLabel>
+            <Input id="location" onChange={handleChange} />
           </Box>
 
           <Box>
-            <FormLabel htmlFor="gearbox">Gearbox</FormLabel>
-            <Input id="gearbox" onChange={handleChange} />
-          </Box>
-
-          <Box>
-            <FormLabel htmlFor="fuel_type">Fuel Type</FormLabel>
-            <Input id="fuel_type" onChange={handleChange} />
+            <FormLabel htmlFor="type">Type</FormLabel>
+            <Input id="type" onChange={handleChange} />
           </Box>
 
           <Box>
@@ -113,8 +107,8 @@ function CreateItemDrawer({ dataType, onUpdate }) {
               defaultValue={1}
               onChange={handleChange}
             >
-              <option value="0">{t('carCard.yes')}</option>
-              <option value="1">{t('carCard.no')}</option>
+              <option value="0">{t('homeCard.yes')}</option>
+              <option value="1">{t('homeCard.no')}</option>
             </Select>
           </Box>
         </>
@@ -123,7 +117,7 @@ function CreateItemDrawer({ dataType, onUpdate }) {
       return (
         <>
           <Box>
-            <FormLabel htmlFor="avatar">avatar</FormLabel>
+            <FormLabel htmlFor="avatar">Avatar</FormLabel>
             <DropFile refe="avatar" handleChange={handleChange} />
           </Box>
 
@@ -172,8 +166,8 @@ function CreateItemDrawer({ dataType, onUpdate }) {
           </Box>
 
           <Box>
-            <FormLabel htmlFor="car_id">Car Name</FormLabel>
-            <Input id="car_name" onChange={handleChange} />
+            <FormLabel htmlFor="home_id">Home Name</FormLabel>
+            <Input id="home_name" onChange={handleChange} />
           </Box>
         </>
       );

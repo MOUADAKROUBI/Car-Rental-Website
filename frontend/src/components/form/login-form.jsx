@@ -48,7 +48,7 @@ const LoginForm = () => {
       
                 localStorage.setItem("userID", data.id);
                 setLoggedIn(true);
-                navigate("/cars");
+                navigate("/homes");
               } else if (!verifyPassword) {
                 showToast(toast, "Wrong password try again.");
               }

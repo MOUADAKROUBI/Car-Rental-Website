@@ -6,17 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Rent;
 
-class Car extends Model
+class Home extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'photo1',
         'photo2',
-        'brand',
-        'model',
-        'gearbox',
-        'fuel_type',
+        'type',
+        'address',
+        'city',
+        'country',
+        'sqrt',
+        'furnished',
+        'bedrooms',
+        'bathrooms',
         'price',
         'available',
     ];
