@@ -5,11 +5,10 @@ import Navbar from "../components/navbar/Navbar";
 import HomeCard from "../components/ui/home-card";
 import Footer from "../components/footer";
 import LoadingSpinner from "../components/ui/loading-spinner";
-import SearchInput from "../components/search";
 import AvatarMenu from "../components/navbar/avatar-menu";
 import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
-import SearchContext from "../SearchContext";
+import SearchContext from "../Contexts/SearchContext";
 import NavbarLoginButtons from "../components/navbar/login-buttons";
 import useAuthentication from "../useAuthentication";
 
@@ -20,7 +19,7 @@ function BookHomesPage() {
   const { isLoggedIn } = useAuthentication();
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/homes").then((response) => {
+    axios.get(import.meta.env.VITE_BACKEND_URL + "/api/homes").then((response) => {
       setHomes(response.data.data);
       setLoading(false);
     });

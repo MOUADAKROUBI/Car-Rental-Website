@@ -62,11 +62,13 @@ function Profile() {
                     <Th>type</Th>
                     <Th>{t("profile.price")}</Th>
                     <Th>{t("profile.bedrooms")}</Th>
+                    <Th>{t("profile.bathrooms")}</Th>
                     <Th>{t("profile.checkInDate")}</Th>
                     <Th>{t("profile.checkOutDate")}</Th>
+                    <Th>status</Th>
                   </Tr>
                 </Thead>
-                {rents.length === 0 ? (
+                {!rents.length ? (
                   <Tbody>
                     <Tr>
                       <Td colSpan={7}>
@@ -82,8 +84,10 @@ function Profile() {
                         <Td>{rent.home.type}</Td>
                         <Td>{rent.home.price}</Td>
                         <Td>{rent.home.bedrooms}</Td>
+                        <Td>{rent.home.bathrooms}</Td>
                         <Td>{rent.checkIn}</Td>
                         <Td>{rent.checkOut}</Td>
+                        <Td color="gray.700">{rent.status}</Td>
                       </Tr>
                     ))}
                   </Tbody>

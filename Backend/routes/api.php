@@ -53,3 +53,6 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::put('homes/{id}', [HomeController::class, 'update']);
 Route::put('rents/{id}', [RentController::class, 'update']);
 Route::post('users/{id}', [UserController::class, 'update']);
+
+Route::post('/rents/{id}/accept', [RentController::class, 'accept']);
+Route::post('/rents/{id}/reject', [RentController::class, 'reject']);

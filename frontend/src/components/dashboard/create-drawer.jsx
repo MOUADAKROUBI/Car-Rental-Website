@@ -13,21 +13,25 @@ import {
   Input,
   useDisclosure,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 import { AddIcon, EditIcon } from "@chakra-ui/icons";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import axios from "axios";
 import DropFile from "../form/dropFile";
 import { t } from "i18next";
+import { showToast } from "../toast-alert";
+import { DataContext } from "../../Contexts/DataContext";
 
 function CreateItemDrawer({ dataType, onUpdate }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
+  const toast = useToast();
 
   const [formData, setFormData] = useState({});
+  const { setAction } = useContext(DataContext)
 
   const handleChange = (e) => {
-    console.log(formData);
     const { id, value, type } = e.target;
     if (type === "file") {
       setFormData({
@@ -41,16 +45,11 @@ function CreateItemDrawer({ dataType, onUpdate }) {
 
   const handleSubmit = async () => {
     // add post requests to the backend
-    const { photo1, photo2, name, location, type, price, available } = formData;
     const formDataToSend = new FormData();
 
-    formDataToSend.append("photo1", photo1);
-    formDataToSend.append("photo2", photo2);
-    formDataToSend.append("name", name);
-    formDataToSend.append("location", location);
-    formDataToSend.append("type", type);
-    formDataToSend.append("price", price);
-    formDataToSend.append("available", available);
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
 
     await axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/api/${dataType}`, formDataToSend, {
@@ -58,12 +57,15 @@ function CreateItemDrawer({ dataType, onUpdate }) {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((response) => {
-        console.log(response.data.data);
+      .then((response) => { 
+        setAction(true);
+        showToast(toast, response.data.message, "success", "Success");
+
         onClose();
       })
       .catch((error) => {
         console.log(error);
+        showToast(toast, error.response.data.message, "error", "Error");
       });
   };
 
@@ -80,18 +82,62 @@ function CreateItemDrawer({ dataType, onUpdate }) {
             <DropFile refe="photo2" handleChange={handleChange} />
           </Box>
           <Box>
-            <FormLabel htmlFor="name">Name</FormLabel>
-            <Input id="name" onChange={handleChange} />
-          </Box>
-
-          <Box>
-            <FormLabel htmlFor="location">Location</FormLabel>
-            <Input id="location" onChange={handleChange} />
-          </Box>
-
-          <Box>
             <FormLabel htmlFor="type">Type</FormLabel>
-            <Input id="type" onChange={handleChange} />
+            <Select
+              id="type"
+              variant="outline"
+              defaultValue="apartment"
+              onChange={handleChange}
+            >
+              <option value="apartment">Apartment</option>
+              <option value="house">House</option>
+              <option value="villa">Villa</option>
+              <option value="condo">Condo</option>
+              <option value="bungalow">Bungalow</option>
+            </Select>
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="address">Address</FormLabel>
+            <Input id="address" onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="city">City</FormLabel>
+            <Input id="city" onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="country">Country</FormLabel>
+            <Input id="country" onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="sqft">Sqft</FormLabel>
+            <Input id="sqft" onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="bedrooms">bedrooms</FormLabel>
+            <Input id="bedrooms" onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="bathrooms">bathrooms</FormLabel>
+            <Input id="bathrooms" onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="furnished">Furnished</FormLabel>
+            <Select
+              id="furnished"
+              variant="outline"
+              defaultValue={1}
+              onChange={handleChange}
+            >
+              <option value={1}>{t('homeCard.yes')}</option>
+              <option value={0}>{t('homeCard.no')}</option>
+            </Select>
           </Box>
 
           <Box>
@@ -107,8 +153,8 @@ function CreateItemDrawer({ dataType, onUpdate }) {
               defaultValue={1}
               onChange={handleChange}
             >
-              <option value="0">{t('homeCard.yes')}</option>
-              <option value="1">{t('homeCard.no')}</option>
+              <option value={1}>{t('homeCard.yes')}</option>
+              <option value={0}>{t('homeCard.no')}</option>
             </Select>
           </Box>
         </>

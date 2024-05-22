@@ -125,5 +125,9 @@
     "home": "Aller à la page d'accueil"
   },
   "header.greeting": "Bonjour, Admin",
-  "header.logout": "Se déconnecter"
+  "header.logout": "Se déconnecter",
+  "acceptReject": {
+    "accept": "Accepter",
+    "reject": "refuser"
+  }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Home;
 use Illuminate\Http\Request;
 use App\Models\Rent;
 use App\Models\User;
@@ -23,7 +22,8 @@ class RentController extends Controller
                 'checkOut' => $rent->checkOut,
                 'price' => $rent->price,
                 'user_name' => $rent->user->firstname . ' ' . $rent->user->lastname,
-                'home_type' => $rent->home->type
+                'home_type' => $rent->home->type,
+                'status' => $rent->status,
             ];
         });
 
@@ -33,14 +33,17 @@ class RentController extends Controller
     // Create a new rent
     public function store(Request $request)
     {
-        //$rent = Rent::create($request->all());
         $rent = DB::table('rentals')->insert([
             'checkIn' => $request->input('checkIn'),
             'checkOut' => $request->input('checkOut'),
             'price' => $request->input('price'),
             'user_id' => $request->input('user_id'),
-            'home_id' => $request->input('home_id')
+            'home_id' => $request->input('home_id'),
+            'status' => $request->input('status'),
+            'created_at' => now(),  // Add this line
+            'updated_at' => now()   // Add this line if you have an 'updated_at' field
         ]);
+
         return response()->json(['success' => true, 'data' => $rent], 201);
     }
 
@@ -54,6 +57,22 @@ class RentController extends Controller
         return response()->json(['success' => true, 'data' => $rents]);
     }
 
+    public function accept($id)
+    {
+        $rent = Rent::findOrFail($id);
+        $rent->status = 'accepted';
+        $rent->save();
+        return response()->json(['success' => true, 'message' => 'Rent accepted successfully']);
+    }
+
+    public function reject($id)
+    {
+        $rent = Rent::findOrFail($id);
+        $rent->status = 'rejected';
+        $rent->save();
+        return response()->json(['success' => true, 'message' => 'Rent rejected successfully']);
+    }
+
     public function update(Request $request, $id)
     {
         $rent = Rent::findOrFail($id);
@@ -64,6 +83,7 @@ class RentController extends Controller
             'price' => 'required',
             'user_id' => 'required',
             'home_id' => 'required',
+            'status'=> 'required',
         ]);
 
         DB::table('rentals')->where('id', $id)->update([
@@ -71,7 +91,8 @@ class RentController extends Controller
             'checkOut' => $request->checkOut,
             'price' => $request->price,
             'user_id' => $request->user_id,
-            'home_id' => $request->home_id
+            'home_id' => $request->home_id,
+            'status' => $request->status,
         ]);
 
         return response()->json([

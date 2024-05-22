@@ -16,6 +16,7 @@ import {
   useDisclosure,
   useToast,
   Avatar,
+  Button,
 } from "@chakra-ui/react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import AvatarMenu from "../components/navbar/avatar-menu";
@@ -27,9 +28,10 @@ import Navbar from "../components/navbar/Navbar";
 import EditItemDrawer from "../components/dashboard/edit-drawer";
 import { showToast } from "../components/toast-alert";
 import CreateItemDrawer from "../components/dashboard/create-drawer";
-import SearchContext from "../SearchContext";
+import SearchContext from "../Contexts/SearchContext";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { DataContext } from "../Contexts/DataContext";
 
 function Dashboard() {
   const { t } = useTranslation();
@@ -46,6 +48,14 @@ function Dashboard() {
   ]);
   const [type, setType] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { action } = useContext(DataContext);
+  const location = useLocation();
+    
+  // Parse the query string parameters from the location object
+  const searchParams = new URLSearchParams(location.search);
+
+  // Get the value of the 'tab' parameter from the query string
+  const tab = searchParams.get('tab');
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -69,9 +79,9 @@ function Dashboard() {
           setData(response.data.data);
           setType("users");
         })
-        .catch( (err) => {
-          console.log(err)
-        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else if (type == "Homes") {
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/homes`)
@@ -84,18 +94,18 @@ function Dashboard() {
             "country",
             "price",
             "sqft",
-            "frunished",
-            "badrooms",
+            "furnished",
+            "bedrooms",
             "bathrooms",
-            "availability",
+            "available",
           ]);
           setData(response.data.data);
           setType("homes");
         })
-        .catch( (err) => {
-          console.log(err)
-        })
-    } else if (type == "Rents"){
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (type == "Rents") {
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/api/rents`)
         .then((response) => {
@@ -106,21 +116,26 @@ function Dashboard() {
             "price",
             "user_name",
             "home_type",
+            "status"
           ]);
           setData(response.data.data);
           setType("rents");
         })
-        .catch( (err) => {
-          console.log(err)
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
+
+  useEffect(() => {
+    handleData(type);
+  }, [action, type]);
 
   const handleUpdateItem = (itemId, updatedItem) => {
     const endpoint = `${
       import.meta.env.VITE_BACKEND_URL
     }/api/${type}/${itemId}`;
-    const formData = new FormData(); 
+    const formData = new FormData();
     for (const key in updatedItem) {
       formData.append(key, updatedItem[key]);
     }
@@ -159,6 +174,48 @@ function Dashboard() {
       .then((response) => {
         showToast(toast, `${type} deleted successfully!`, "success", "Success");
         setData((prevData) => prevData.filter((item) => item.id !== id));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleAccept = (id) => {
+    const endpoint = `${
+      import.meta.env.VITE_BACKEND_URL
+    }/api/rents/${id}/accept`;
+
+    axios
+      .post(endpoint)
+      .then((response) => {
+        showToast(toast, "Rent accepted successfully!", "success", "Success");
+        setData((prevData) => prevData.filter((item) => {
+          if (item.id === id) {
+            item.status = "accepted";
+          }
+          return item;
+        }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleRejecter = (id) => {
+    const endpoint = `${
+      import.meta.env.VITE_BACKEND_URL
+    }/api/rents/${id}/reject`;
+
+    axios
+      .post(endpoint)
+      .then((response) => {
+        showToast(toast, "Rent rejected successfully!", "success", "Success");
+        setData((prevData) => prevData.filter((item) => {
+          if (item.id === id) {
+            item.status = "rejected";
+          }
+          return item;
+        }));
       })
       .catch((error) => {
         console.log(error);
@@ -208,10 +265,15 @@ function Dashboard() {
                         ? searchResults.map((item) => (
                             <Tr key={item.id}>
                               {header.map((column) => {
-                                if (column === "availability")
+                                if (
+                                  column === "available" ||
+                                  column === "furnished"
+                                )
                                   return (
                                     <Td key={item.id}>
-                                      {item[column] === 0 ? "yes" : "no"}
+                                      {item[column]
+                                        ? t("homeCard.yes")
+                                        : t("homeCard.no")}
                                     </Td>
                                   );
                                 else
@@ -251,7 +313,10 @@ function Dashboard() {
                         : data.map((item) => (
                             <Tr key={item.id} textAlign="center">
                               {header.map((column) => {
-                                if (column === "availability") {
+                                if (
+                                  column === "available" ||
+                                  column === "furnished"
+                                ) {
                                   return (
                                     <Td key={item.id}>
                                       {item[column]
@@ -277,7 +342,29 @@ function Dashboard() {
                                   );
                                 }
                               })}
-                              <Td>
+                              <Td className="d-flex gap-2">
+                                {/* add confirm rejecter button */}
+                                {
+                                  tab == "Rents" && (
+                                    <>
+                                      <Button
+                                        onClick={() => handleAccept(item.id)}
+                                        disabled={item.status === "accepted"}
+                                        colorScheme="green"
+                                      >
+                                        {t("acceptReject.accept")}
+                                      </Button>
+                                      <Button
+                                        onClick={() => handleRejecter(item.id)}
+                                        disabled={item.status === "rejected"}
+                                        colorScheme="red"
+                                      >
+                                        {t("acceptReject.reject")}
+                                      </Button>
+                                    </>
+                                  )
+                                }
+
                                 <EditItemDrawer
                                   dataType={type}
                                   item={item}

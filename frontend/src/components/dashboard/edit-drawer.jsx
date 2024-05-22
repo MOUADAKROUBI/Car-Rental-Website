@@ -50,16 +50,38 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
 
           <Box>
             <FormLabel htmlFor="type">Type</FormLabel>
-            <Input
+            <Select
               id="type"
-              value={formData.type}
+              variant="outline"
+              defaultValue={formData.type}
               onChange={handleChange}
-            />
+            >
+              <option value="apartment">Apartment</option>
+              <option value="house">House</option>
+              <option value="villa">Villa</option>
+              <option value="condo">Condo</option>
+              <option value="bungalow">Bungalow</option>
+            </Select>
           </Box>
 
           <Box>
-            <FormLabel htmlFor="location">Location</FormLabel>
-            <Input id="location" value={formData.location} onChange={handleChange} />
+            <FormLabel htmlFor="address">Address</FormLabel>
+            <Input id="address" value={formData.address} onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="city">City</FormLabel>
+            <Input id="city" value={formData.city} onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="country">Country</FormLabel>
+            <Input id="country" value={formData.country} onChange={handleChange} />
+          </Box>
+
+          <Box>
+            <FormLabel htmlFor="sqft">Sqft</FormLabel>
+            <Input id="sqft" value={formData.sqft} onChange={handleChange} />
           </Box>
 
           <Box>
@@ -81,6 +103,19 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
           </Box>
 
           <Box>
+            <FormLabel htmlFor="furnished">Furnished</FormLabel>
+            <Select
+              id="furnished"
+              variant="outline"
+              defaultValue={formData.furnished ? 1 : 0}
+              onChange={handleChange}
+            >
+              <option value={1}>{t('homeCard.yes')}</option>
+              <option value={0}>{t('homeCard.no')}</option>
+            </Select>
+          </Box>
+
+          <Box>
             <FormLabel htmlFor="price">Price</FormLabel>
             <Input id="price" value={formData.price} onChange={handleChange} />
           </Box>
@@ -90,11 +125,11 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
             <Select
               id="available"
               variant="outline"
-              defaultValue={formData.available}
+              defaultValue={formData.available ? 1 : 0}
               onChange={handleChange}
             >
-              <option value="1">{t('homeCard.yes')}</option>
-              <option value="0">{t('homeCard.no')}</option>
+              <option value={1}>{t('homeCard.yes')}</option>
+              <option value={0}>{t('homeCard.no')}</option>
             </Select>
           </Box>
         </>
@@ -143,20 +178,20 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
       return (
         <>
           <Box>
-            <FormLabel htmlFor="rental_date">Rental Date</FormLabel>
+            <FormLabel htmlFor="checkIn">Check In</FormLabel>
             <Input
               ref={firstField}
-              id="rental_date"
-              value={formData.rental_date}
+              id="checkIn"
+              value={formData.checkIn}
               onChange={handleChange}
             />
           </Box>
 
           <Box>
-            <FormLabel htmlFor="return_date">Return Date</FormLabel>
+            <FormLabel htmlFor="checkOut">CheckOut</FormLabel>
             <Input
-              id="return_date"
-              value={formData.return_date}
+              id="checkOut"
+              value={formData.checkOut}
               onChange={handleChange}
             />
           </Box>
@@ -167,19 +202,19 @@ function EditItemDrawer({ dataType, item, onUpdate }) {
           </Box>
 
           <Box>
-            <FormLabel htmlFor="user_id">Customer ID</FormLabel>
+            <FormLabel htmlFor="user_name">User Name</FormLabel>
             <Input
-              id="user_id"
-              value={formData.user_id}
+              id="user_name"
+              value={formData.user_name}
               onChange={handleChange}
             />
           </Box>
 
           <Box>
-            <FormLabel htmlFor="home_id">Home ID</FormLabel>
+            <FormLabel htmlFor="home_type">Home Name</FormLabel>
             <Input
-              id="home_id"
-              value={formData.home_id}
+              id="home_type"
+              value={formData.home_type}
               onChange={handleChange}
             />
           </Box>

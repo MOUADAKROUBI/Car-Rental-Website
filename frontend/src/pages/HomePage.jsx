@@ -12,10 +12,10 @@ import WhyChooseUs from "../components/home/why-choose-us";
 import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import { useEffect, useState } from "react";
-import FeaturedHomes from "../components/home/featured-vehicles";
+import FeaturedHomes from "../components/home/featured-Homes";
 
 function Home() {
-  const { isLoggedIn, isLoading } = useAuthentication();
+  const { isLoggedIn } = useAuthentication();
   const [showNavbarContent, setShowNavbarContent] = useState(false);
 
   useEffect(() => {

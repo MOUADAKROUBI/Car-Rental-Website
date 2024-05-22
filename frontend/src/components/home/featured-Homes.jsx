@@ -91,9 +91,9 @@ const FeaturedHomes = () => {
           direction={{ base: "column", md: "row" }}
           spacing={{ base: 10, md: 4, lg: 10 }}
         >
-          <HomeCard image="front5.webp" homeName="Luxury Villa" location="Malibu" />
-          <HomeCard image="front2.webp" homeName="Beach House" location="Miami" />
-          <HomeCard image="front1.webp" homeName="Mountain Cabin" location="Aspen" />
+          <HomeCard image="front3.jpg" homeName="Luxury Villa" location="Malibu" />
+          <HomeCard image="front2.jpg" homeName="Beach House" location="Miami" />
+          <HomeCard image="front1.jpg" homeName="Mountain Cabin" location="Aspen" />
         </Stack>
       </Container>
     </Box>

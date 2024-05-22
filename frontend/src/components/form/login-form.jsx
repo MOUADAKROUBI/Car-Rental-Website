@@ -24,7 +24,7 @@ const LoginForm = () => {
     if (email.current.value && password.current.value) {
       try {
         axios
-          .post("http://127.0.0.1:8000/api/login", {
+          .post(import.meta.env.VITE_BACKEND_URL + "/api/login", {
             email: email.current.value,
           })
           .then((response) => {

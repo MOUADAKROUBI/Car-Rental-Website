@@ -20,13 +20,8 @@ const HomeCard = ({ props }) => {
     to_route(route);
   };
 
-  const backendURL = import.meta.env.VITE_BACKEND_URL;
-  const photo1 =
-    props.id <= 6 ? `/images/back${props.id}.webp` : backendURL + props.photo1;
-  const photo2 =
-    props.id <= 6 ? `/images/front${props.id}.webp` : backendURL + props.photo2;
   return (
-    <div className="home-card">
+    <div className="home-card" data-aos="zoom-in-up">
       <div className="details">
         <div className="thumb-gallery">
           <Box bg="gray.400" w="full" h="full">
@@ -35,14 +30,14 @@ const HomeCard = ({ props }) => {
               objectFit="cover"
               h={"215px"}
               w={"full"}
-              src={photo1}
+              src={`${import.meta.env.VITE_BACKEND_URL}/${props.photo1}`}
             ></Image>
             <Image
               className="second"
               objectFit="cover"
               h={"215px"}
               w={"full"}
-              src={photo2}
+              src={`${import.meta.env.VITE_BACKEND_URL}/${props.photo2}`}
             ></Image>
           </Box>
         </div>
@@ -110,11 +105,11 @@ const HomeCard = ({ props }) => {
                 {t("homeCard.available")}
               </Heading>
               <Text fontWeight="500" color="gray.600">
-                {props.available === 1
+                {
+                  props.available
                   ? t("homeCard.yes")
-                  : props.available === 0
-                  ? t("homeCard.no")
-                  : props.available}
+                  : t("homeCard.no")
+                }
               </Text>
             </GridItem>
           </SimpleGrid>

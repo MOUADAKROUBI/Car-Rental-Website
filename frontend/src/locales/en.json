@@ -124,5 +124,9 @@
     "home": "Go to home"
   },
   "header.greeting": "Hi, Admin",
-  "header.logout": "Logout"
+  "header.logout": "Logout",
+  "acceptReject": {
+    "accept": "Accept",
+    "reject": "Reject"
+  }
 }

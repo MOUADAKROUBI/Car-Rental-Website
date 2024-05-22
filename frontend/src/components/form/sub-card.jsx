@@ -22,15 +22,6 @@ const SubCard = ({
         <Heading fontFamily="" fontWeight="400" mb={3}>
         {t("form.welcome")}
         </Heading>
-        <Text mb={6}>{question}</Text>
-
-        <Link to={route} className={textHoverColor + " subcard-btn-outline"}>
-          {btnText}
-        </Link>
-        {" "} or {" "}
-        <Link to="/" className={textHoverColor + "subcard-btn"}>
-          {t("form.home")}
-        </Link>
       </div>
     </div>
   );

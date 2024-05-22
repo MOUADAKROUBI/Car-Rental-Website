@@ -100,6 +100,7 @@ function RentPage() {
       price: totalPrice,
       user_id: localStorage.getItem("userID"),
       home_id: params.id,
+      status: "pending",
     };
 
     if (datesIsValid && isLoggedIn) {
@@ -139,7 +140,7 @@ function RentPage() {
           mb={10}
         >
           <Box w={{ base: "100%", lg: "50%" }}>
-            <Image src={home.photo1} objectFit="cover" h={"full"}></Image>
+            <Image src={`${import.meta.env.VITE_BACKEND_URL}/${home.photo1}`} objectFit="cover" h={"full"}></Image>
           </Box>
           <Box w={{ base: "100%", lg: "50%" }} p={"5%"} bg={"white"} h={"full"}>
             <Button

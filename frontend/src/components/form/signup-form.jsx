@@ -30,7 +30,7 @@ const SignUpForm = () => {
       );
 
     const hashedPassword = bcrypt.hashSync(password.current.value);
-    axios.post("http://127.0.0.1:8000/api/signup", {
+    axios.post(import.meta.env.VITE_BACKEND_URL + "/api/signup", {
       avatar: null,
       firstname: firstname.current.value,
       lastname: lastname.current.value,

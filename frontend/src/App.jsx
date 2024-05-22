@@ -10,6 +10,7 @@ import NotFound from "./pages/Page404";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import useAuthentication from "./useAuthentication";
 import { useEffect } from "react";
+import { AuthContext } from "./Contexts/AuthContext";
 
 function RedirectToHome() {
   let navigate = useNavigate();

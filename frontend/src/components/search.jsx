@@ -1,7 +1,7 @@
 import { SearchIcon, Icon } from "@chakra-ui/icons";
 import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import SearchContext from "../SearchContext";
+import SearchContext from "../Contexts/SearchContext";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
@@ -14,9 +14,9 @@ const SearchInput = ({ type }) => {
     let cancelRequest = false;
 
     const fetchData = async () => {
-      if (["rents", "users", "cars"].includes(type)) {
+      if (["rents", "users", "homes"].includes(type)) {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/${type}`);
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/${type}`);
           if (!cancelRequest) {
             setData(response.data.data);
             setSearchResults([]);
@@ -39,7 +39,7 @@ const SearchInput = ({ type }) => {
 
     let filteredResults = [];
     if (data) {
-      if (type === "cars") {
+      if (type === "homes") {
         filteredResults = data.filter((item) =>
           item.brand.toLowerCase().includes(searchQuery)
         );
