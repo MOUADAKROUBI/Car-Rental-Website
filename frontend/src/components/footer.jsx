@@ -6,12 +6,9 @@ import {
   SimpleGrid,
   Text,
   Link,
-  Image,
-  VisuallyHidden,
-  chakra,
-  useColorModeValue,
+  Grid,
 } from "@chakra-ui/react";
-import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
+import { FaTwitter, FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const ListHeader = ({ children }) => {
@@ -53,21 +50,21 @@ const Footer = () => {
           </Stack>
 
           <Stack align={"flex-start"}>
-            <ListHeader>{t("footer.installApp")}</ListHeader>
-            <Image
-              src="images/appstore.png"
-              alt="Download on the App Store"
-              boxSize="130px"
-              height="100%"
-              objectFit="contain"
-            />
-            <Image
-              src="images/playstore.png"
-              alt="Get it on Google Play"
-              boxSize="130px"
-              height="100%"
-              objectFit="contain"
-            />
+            <ListHeader>{t("footer.oursocialmedia")}</ListHeader>
+            <Grid templateColumns="repeat(3, 1fr)" className="d-flex justify-center" gap={4}>
+              <Link href={"#"} color={"gray.700"}>
+                <FaTwitter className="fs-3" />
+              </Link>
+              <Link href={"#"} color={"gray.700"}>
+                <FaYoutube className="fs-3" />
+              </Link>
+              <Link href={"#"} color={"gray.700"}>
+                <FaInstagram className="fs-3" />
+              </Link>
+              <Link href={"#"} color={"gray.700"}>
+                <FaFacebook className="fs-3" />
+              </Link>
+            </Grid>
           </Stack>
         </SimpleGrid>
       </Container>

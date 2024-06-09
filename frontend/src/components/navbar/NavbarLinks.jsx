@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SearchInput from "../search";
 import axios from "axios";
+import { Image } from "@chakra-ui/react";
 
 const NavbarLinks = () => {
   const { t } = useTranslation();
@@ -22,8 +23,9 @@ const NavbarLinks = () => {
   
   return (
     <div className="collapse navbar-collapse mt-lg-0 mt-4" id="navbarLinks">
-      <Link className="navbar-brand" to="/">
-        Locavo
+      <Link className="navbar-brand fw-bold d-flex align-items-center justify-content-center" to="/">
+        <Image src="/logo.png" className=" " style={{ width: "50px", margin: "5px" }} />
+        SAROTI
       </Link>
       <ul className="navbar-nav">
         <li className="nav-item mx-2">

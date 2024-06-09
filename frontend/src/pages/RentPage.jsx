@@ -48,7 +48,7 @@ function RentPage() {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/homes/${params.id}`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/homes/${params.id}`)
       .then((response) => {
         setHome(response.data.data[0]);
         setTotalPrice(response.data.data[0].price);
@@ -67,10 +67,7 @@ function RentPage() {
 
     const rentDuration = checkOutDate - checkInDate;
     if (checkIn.current.value && checkOut.current.value) {
-      if (checkIn < now || checkOut < now) {
-        setDatesIsValid(false);
-        showToast(toast, t("homeCard.selectValidDates"), "error", "Error");
-      } else if (rentDuration <= 0) {
+      if (checkIn < now || checkOut < now || rentDuration <= 0) {
         setDatesIsValid(false);
         showToast(toast, t("homeCard.selectValidDates"), "error", "Error");
       } else {
@@ -103,7 +100,7 @@ function RentPage() {
       status: "pending",
     };
 
-    if (datesIsValid && isLoggedIn) {
+    if (datesIsValid && isLoggedIn) 
       axios
         .post(import.meta.env.VITE_BACKEND_URL + "/api/rents", rent)
         .then((response) => {
@@ -114,11 +111,10 @@ function RentPage() {
           showToast(toast, "Creating a rent failed", "error", "Error");
           console.error("Error creating rent:", error);
         });
-    } else if (!isLoggedIn) {
+    else if (!isLoggedIn) 
       showToast(toast, "You need to login first", "error", "Error");
-    } else {
+    else 
       showToast(toast, "Please select valid dates", "error", "Error");
-    }
   }
 
   return (

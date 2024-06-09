@@ -7,6 +7,7 @@ import {
   DrawerOverlay,
   useDisclosure,
   IconButton,
+  Image,
 } from "@chakra-ui/react";
 import NavItem from "./nav-item";
 import { FaUserFriends } from "react-icons/fa";
@@ -81,9 +82,10 @@ const SidebarContent = ({ handleData, ...props }) => {
         {...props}
       >
         <Flex px="4" py="5" align="center">
-          <Text fontSize="2xl" ml="2" color="white" fontWeight="semibold">
-            LOCAVO
-          </Text>
+          <Link className="navbar-brand text-white fw-bold d-flex align-items-center justify-content-center" ml="2" to="/">
+            <Image src="/logo.png" style={{ width: "50px", margin: "5px" }} />
+            SAROTI
+          </Link>
         </Flex>
         <Flex
           direction="column"

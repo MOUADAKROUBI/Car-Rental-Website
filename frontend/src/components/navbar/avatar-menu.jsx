@@ -74,7 +74,7 @@ const AvatarMenu = () => {
             </MenuButton>
             <MenuList>
               <Box mt={4} textAlign="center">
-                <Text fontWeight="bold">{user.firstname+' '+user.lastname}</Text>
+                <Text fontWeight="bold" className="text-capitalize">{user.firstname+' '+user.lastname}</Text>
                 <Text fontSize="sm" color={"gray"}>
                   {user.email}
                 </Text>
@@ -85,6 +85,9 @@ const AvatarMenu = () => {
               </MenuItem>
               <MenuItem onClick={() => navigate("/profile")}>
                 {t("menuList.profile")}
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/dashboard")}>
+                {t("menuList.dashboard")}
               </MenuItem>
               <MenuDivider />
               <MenuItem

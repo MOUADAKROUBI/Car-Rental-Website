@@ -50,7 +50,7 @@
       "title": "Propriétaire d'une petite entreprise"
     }
   ],
-  "footer.about": "LOCAVO",
+  "footer.about": "À propos de notre entreprise",
   "footer.aboutDescription": "Large choix de logements, prix compétitifs pour rendre votre expérience agréable.",
   "footer.company": "Entreprise",
   "footer.blog": "Blog",
@@ -60,8 +60,8 @@
   "footer.cookiesPolicy": "Politique des cookies",
   "footer.privacyPolicy": "Politique de confidentialité",
   "footer.termsOfService": "Conditions d'utilisation",
-  "footer.installApp": "Installer l'application",
-  "footer.copyright": "© Copyright. Tous droits réservés.",
+  "footer.oursocialmedia": "Nos réseaux sociaux",
+  "footer.copyright": "MOUAD AKROUBI © Copyright. Tous droits réservés.",
   "navbarLoginButtons.login": "Connexion",
   "navbarLoginButtons.signup": "Inscrivez-vous gratuitement",
   "linkItems.home": "Accueil",
@@ -73,6 +73,7 @@
   "menuList.english": "Anglais",
   "menuList.french": "Français",
   "menuList.profile": "Profil",
+  "menuList.dashboard": "Tableau de bord",
   "menuList.logout": "Déconnexion",
   "searchInput": "Rechercher ...",
 

@@ -1,6 +1,6 @@
 {
   "navbar.home": "Home",
-  "navbar.bookHomes": "Book Homes",
+  "navbar.bookHomes": "Homes",
   "navbar.dashboard": "Dashboard",
   "homePageText.spanTitle": "Rent a home ",
   "homePageText.title": "and find great deals with us",
@@ -60,8 +60,8 @@
   "footer.cookiesPolicy": "Cookies Policy",
   "footer.privacyPolicy": "Privacy Policy",
   "footer.termsOfService": "Terms of Service",
-  "footer.installApp": "Install App",
-  "footer.copyright": "© Copyright. All rights reserved.",
+  "footer.oursocialmedia": "Our Social Media",
+  "footer.copyright": "MOUAD AKROUBI © Copyright. All rights reserved.",
   "navbarLoginButtons.login": "Login",
   "navbarLoginButtons.signup": "Sign up for free",
   "linkItems.home": "Home",
@@ -73,6 +73,7 @@
   "menuList.english": "English",
   "menuList.french": "French",
   "menuList.profile": "Profile",
+  "menuList.dashboard": "Dashboard",
   "menuList.logout": "Logout",
   "searchInput": "Search ...",
   "homeCard": {

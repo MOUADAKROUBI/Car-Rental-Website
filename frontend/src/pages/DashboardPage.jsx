@@ -50,12 +50,12 @@ function Dashboard() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { action } = useContext(DataContext);
   const location = useLocation();
-    
+
   // Parse the query string parameters from the location object
   const searchParams = new URLSearchParams(location.search);
 
   // Get the value of the 'tab' parameter from the query string
-  const tab = searchParams.get('tab');
+  const tab = searchParams.get("tab");
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -116,7 +116,7 @@ function Dashboard() {
             "price",
             "user_name",
             "home_type",
-            "status"
+            "status",
           ]);
           setData(response.data.data);
           setType("rents");
@@ -189,12 +189,14 @@ function Dashboard() {
       .post(endpoint)
       .then((response) => {
         showToast(toast, "Rent accepted successfully!", "success", "Success");
-        setData((prevData) => prevData.filter((item) => {
-          if (item.id === id) {
-            item.status = "accepted";
-          }
-          return item;
-        }));
+        setData((prevData) =>
+          prevData.filter((item) => {
+            if (item.id === id) {
+              item.status = "accepted";
+            }
+            return item;
+          })
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -210,12 +212,14 @@ function Dashboard() {
       .post(endpoint)
       .then((response) => {
         showToast(toast, "Rent rejected successfully!", "success", "Success");
-        setData((prevData) => prevData.filter((item) => {
-          if (item.id === id) {
-            item.status = "rejected";
-          }
-          return item;
-        }));
+        setData((prevData) =>
+          prevData.filter((item) => {
+            if (item.id === id) {
+              item.status = "rejected";
+            }
+            return item;
+          })
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -292,13 +296,15 @@ function Dashboard() {
                                   );
                               })}
                               <Td>
-                                <EditItemDrawer
-                                  dataType={type}
-                                  item={item}
-                                  onUpdate={(updatedItem) =>
-                                    handleUpdateItem(item.id, updatedItem)
-                                  }
-                                />
+                                {type != "rents" && (
+                                  <EditItemDrawer
+                                    dataType={type}
+                                    item={item}
+                                    onUpdate={(updatedItem) =>
+                                      handleUpdateItem(item.id, updatedItem)
+                                    }
+                                  />
+                                )}
                                 <IconButton
                                   onClick={() => handleDelete(item.id)}
                                   bg={""}
@@ -344,34 +350,34 @@ function Dashboard() {
                               })}
                               <Td className="d-flex gap-2">
                                 {/* add confirm rejecter button */}
-                                {
-                                  tab == "Rents" && (
-                                    <>
-                                      <Button
-                                        onClick={() => handleAccept(item.id)}
-                                        disabled={item.status === "accepted"}
-                                        colorScheme="green"
-                                      >
-                                        {t("acceptReject.accept")}
-                                      </Button>
-                                      <Button
-                                        onClick={() => handleRejecter(item.id)}
-                                        disabled={item.status === "rejected"}
-                                        colorScheme="red"
-                                      >
-                                        {t("acceptReject.reject")}
-                                      </Button>
-                                    </>
-                                  )
-                                }
+                                {tab == "Rents" && (
+                                  <>
+                                    <Button
+                                      onClick={() => handleAccept(item.id)}
+                                      disabled={item.status === "accepted"}
+                                      colorScheme="green"
+                                    >
+                                      {t("acceptReject.accept")}
+                                    </Button>
+                                    <Button
+                                      onClick={() => handleRejecter(item.id)}
+                                      disabled={item.status === "rejected"}
+                                      colorScheme="red"
+                                    >
+                                      {t("acceptReject.reject")}
+                                    </Button>
+                                  </>
+                                )}
 
-                                <EditItemDrawer
-                                  dataType={type}
-                                  item={item}
-                                  onUpdate={(updatedItem) =>
-                                    handleUpdateItem(item.id, updatedItem)
-                                  }
-                                />
+                                {type != "rents" && (
+                                  <EditItemDrawer
+                                    dataType={type}
+                                    item={item}
+                                    onUpdate={(updatedItem) =>
+                                      handleUpdateItem(item.id, updatedItem)
+                                    }
+                                  />
+                                )}
                                 <IconButton
                                   onClick={() => handleDelete(item.id)}
                                   bg={""}

@@ -1,4 +1,4 @@
-import { Container, Flex, VStack } from "@chakra-ui/react";
+import { Container, Flex, Image, Menu, MenuButton, MenuItem, MenuList, VStack } from "@chakra-ui/react";
 import Navbar from "../components/navbar/Navbar";
 import NavbarLoginButtons from "../components/navbar/login-buttons";
 import HomePageText from "../components/home/home-page-text";
@@ -13,10 +13,27 @@ import HomeSidebarContent from "../components/home/home-sidebar-content";
 import NavbarLinks from "../components/navbar/NavbarLinks";
 import { useEffect, useState } from "react";
 import FeaturedHomes from "../components/home/featured-Homes";
+import { BellIcon, HamburgerIcon } from "@chakra-ui/icons";
+import axios from "axios";
 
 function Home() {
   const { isLoggedIn } = useAuthentication();
   const [showNavbarContent, setShowNavbarContent] = useState(false);
+  const [rents, setRents] = useState([]);
+
+  useEffect(() => {
+    isLoggedIn ?
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/${localStorage.getItem("userID")}/rents`)
+    .then((response) => {
+      if (response.status === 200) {
+        setRents(response.data.data);
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+    }) : 
+    setRents([])
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,7 +49,33 @@ function Home() {
         links={<NavbarLinks />}
         buttons={
           showNavbarContent &&
-          (isLoggedIn ? <AvatarMenu /> : <NavbarLoginButtons />)
+          (isLoggedIn ? (
+            <>
+              <Menu>
+                <MenuButton
+                  as={BellIcon}
+                  aria-label='Options'
+                  icon={<HamburgerIcon />}
+                  variant='outline'
+                  className="fs-1 cursor-pointer"
+                />
+                <MenuList style={{maxWidth: 450}}>
+                  {
+                    rents.length === 0 ? <div className="pb-2 ps-2">you have no notifications</div> : <div className="pb-2 ps-2">{`you have ${rents.length} notifications`}</div>
+                  }
+                  {
+                    rents.map((rent) => (
+                      <MenuItem key={rent.id}>
+                        <Image src={`${import.meta.env.VITE_BACKEND_URL}/${rent.home.photo1}`} alt="home image" className="me-2 rounded-circle" style={{width: 50, height: 50}} />
+                        your rent has been {rent.status} by the owner of the house you applied for on {Date(rent.updated_at)}
+                      </MenuItem>
+                    ))
+                  }
+                </MenuList>
+              </Menu>
+              <AvatarMenu />
+            </>
+          ) : <NavbarLoginButtons />)
         }
       />
       <Container overflow="hidden" maxWidth="1720px" px={[12, 8, 8]}>
